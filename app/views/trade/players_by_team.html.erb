@@ -1,0 +1,81 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Trade Machine</a>
+    </div>
+
+   <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="">Players<span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="#">Teams<span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href= "#">View Trades <span class="sr-only">(current)</span></a></li>
+        
+        
+          
+          </ul>
+        </li>
+      </ul>
+      <form class="navbar-form navbar-left">
+        
+      
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<h1>Trade Player</h1>
+<p>Pick Players to be traded</p>
+
+<div class="row">
+	<% @players.each do |player| %>
+		<div class="col-sm-12 | col-md-2">
+			<div class="well text-center">
+				<h3><%= link_to player.team.name %></h3>
+				<h3><%= link_to player.name %></h3>
+
+				<p>
+					<a href="#" data-toggle="modal" data-target="#myModal_<%= player.id %>">
+						<span class="glyphicon glyphicon-transfer"></span>Trade player
+					</a>
+				</p>				
+			</div>
+      </div>	
+
+  
+
+		
+		<div class="modal fade" id="myModal_<%= player.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><%= player.team.name %></h4>
+      </div>
+      <div class="modal-body">
+      	<p>Player Name: <%= player.name %></p>
+       
+      </div>
+      <div class="modal-footer">
+      	<div style="display: inline-block;">
+      		<%= form_tag add_to_trade_path, method: :post do %>
+      		<%= hidden_field_tag :player_id, player.id %>
+      		<%= submit_tag "Add to Trade", class: "btn btn-primary", style: "display: inline-block;" %>
+      		<% end %>      		
+      	</div>
+      	<div style="display: inline-block;">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+	<% end %>	
+</div>
+ 

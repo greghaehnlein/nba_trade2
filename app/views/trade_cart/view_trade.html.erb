@@ -1,0 +1,22 @@
+<h2>Players up for Trade</h2>
+
+<div>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Player</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @line_items.each do |line_item| %>
+			<tr>
+				<td><%= line_item.player.name %></td>
+				<td><%= link_to "Delete Item", delete_from_trade_path(line_item_id: line_item.id), method: :post, class: "btn btn_danger", data: { confrim: "Are your sure?"} %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
+
+<%= link_to "Proceed with Trade", trade_path, class: "btn btn-success" %>
+<%= link_to "Look for another player to trade", root_path, class: "btn btn-info" %>
